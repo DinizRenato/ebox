@@ -1,0 +1,47 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Projetos</h1>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-sm btn-primary float-right">+ Projeto</button>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%; text-align: center;">ID</th>
+                                <th style="width: 70%; text-align: left;">Projeto</th>
+                                <th style="width: 5%; text-align: center;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let projeto of projetos">
+                                <td>{{ projeto.id }}</td>
+                                <td>{{ projeto.name }}</td>
+                                <td>
+                                    <a class="text-muted" href="#">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+
+</section>
