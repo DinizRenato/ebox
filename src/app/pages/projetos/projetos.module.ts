@@ -4,10 +4,11 @@ import { ProjetosListComponent } from './projetos-list/projetos-list.component';
 import { ProjetosRouginModule } from './projetos-routing.module';
 import { ProjetosFormComponent } from './projetos-form/projetos-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ProjetosComponent } from './projetos/projetos.component';
 
 
 @NgModule({
-  declarations: [ProjetosListComponent, ProjetosFormComponent],
+  declarations: [ProjetosListComponent, ProjetosFormComponent, ProjetosComponent],
   imports: [
     CommonModule,
     ProjetosRouginModule,

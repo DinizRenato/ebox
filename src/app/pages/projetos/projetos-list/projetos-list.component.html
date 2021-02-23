@@ -30,7 +30,7 @@
                                 <td>{{ projeto.id }}</td>
                                 <td>{{ projeto.name }}</td>
                                 <td style="text-align: center;">
-                                    <a class="text-muted mr-2">
+                                    <a class="text-muted mr-2" [routerLink]="[projeto.id]">
                                         <i class="fas fa-search-plus"></i>
                                     </a>
                                     <a class="text-muted" [routerLink]="[projeto.id, 'edit']">
