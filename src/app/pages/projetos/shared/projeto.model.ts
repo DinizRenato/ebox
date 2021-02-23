@@ -11,7 +11,7 @@ export class Projeto extends BaseResourceModel {
 
     static fromJson(jsonData: any): BaseResourceModel {
         let projeto = new Projeto();
-        projeto.id = jsonData['id'];
+        projeto.id = jsonData['id'] != undefined ? jsonData['id'] : '';
         projeto.name = jsonData['name'];
         return projeto;
     }

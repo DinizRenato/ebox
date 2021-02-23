@@ -38,8 +38,7 @@ export class BaseResourceService<T extends BaseResourceModel> {
     }
 
     update(resource: T): Observable<T> {
-        const url = `${this.apiPath}/${resource.id}`;
-        return this.http.put<T>(url, resource).pipe(
+        return this.http.put<T>(this.apiPath, resource).pipe(
             catchError(this.handleError)
         )
     }

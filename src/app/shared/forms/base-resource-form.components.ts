@@ -1,12 +1,11 @@
-import { AfterContentChecked, Injector, OnInit } from "@angular/core";
+import { AfterContentChecked, Injectable, Injector, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { BaseResourceModel } from "../models/base-resource.model";
 import { BaseResourceService } from "../services/base-resource.service";
 
-import toastr from 'toastr';
-
+@Injectable()
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
     currentAction: string;
@@ -31,8 +30,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     ngAfterContentChecked(): void {
-        throw new Error("Method not implemented.");
+        this.setPageTitle();
     }
+
     ngOnInit(): void {
         this.setCurrentAction();
         this.buildResourceForm();
@@ -84,8 +84,8 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected createResource() {
-
         const resource: T = this.jsonDataRoResourceFn(this.resourceForm.value);
+        console.log(resource);
         this.resourceService.create(resource)
             .subscribe(
                 resource => this.actionForSuccess(resource),
@@ -105,10 +105,12 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected actionForSuccess(resource: T) {
-        toastr.success("Solicitação processada com sucesso");
+        // toastr.success("Solicitação processada com sucesso");
+        console.log(this.route.snapshot.parent);
 
         //ROTA INICIAL DO COMPONENTE
-        const baseComponentPath: string = this.route.snapshot.parent.url[0].path
+        const baseComponentPath: string = this.route.snapshot.parent.url.length > 0 ? this.route.snapshot.parent.url[0].path : '';
+
 
         //redirecionar para recarregar a página
         this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
@@ -118,7 +120,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected actionForError(error) {
-        toastr.error("Ocorreu erro ao processar solicitação")
+        // toastr.error("Ocorreu erro ao processar solicitação")
         this.submittingForm = false;
 
         if (error.status === 422) {

@@ -5,10 +5,10 @@
                 <h1>Projetos</h1>
             </div>
             <div class="col-sm-6">
-                <button class="btn btn-sm btn-primary float-right">+ Projeto</button>
+                <button class="btn btn-sm btn-primary float-right" routerLink="new">+ Projeto</button>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
 <section class="content">
@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-body table-responsive p-0" style="height: 300px;">
+                <div class="card-body table-responsive p-0" style="height: 600px;">
                     <table class="table table-head-fixed table-hover">
                         <thead>
                             <tr>
@@ -29,8 +29,11 @@
                             <tr *ngFor="let projeto of projetos">
                                 <td>{{ projeto.id }}</td>
                                 <td>{{ projeto.name }}</td>
-                                <td>
-                                    <a class="text-muted" href="#">
+                                <td style="text-align: center;">
+                                    <a class="text-muted mr-2">
+                                        <i class="fas fa-search-plus"></i>
+                                    </a>
+                                    <a class="text-muted" [routerLink]="[projeto.id, 'edit']">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
@@ -38,9 +41,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
     </div>
 
