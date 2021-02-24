@@ -1,0 +1,45 @@
+<div class="card">
+
+    <div class="card-header border-0">
+        <div class="d-flex justify-content-between">
+            <h3 class="card-title">{{metadado.name}}</h3>
+            <a class="text-muted" [routerLink]="['/metadados', metadado.id,'edit']">
+                <i class="fas fa-edit"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="card-body">
+
+        <div class="d-flex">
+            <p class="d-flex flex-column">
+                <span class="text-bold text-lg">{{metadado.type}}</span>
+            </p>
+            <p class="ml-auto d-flex flex-column text-right">
+                Order: {{metadado.order}}
+            </p>
+        </div>
+        <p *ngIf="metadado.type == 'data'">
+            {{optionsPorTipo() | date : 'dd/MM/yyyy'}}
+        </p>
+        <p *ngIf="metadado.type == 'texto'">
+            {{optionsPorTipo()}}
+        </p>
+        <p *ngIf="metadado.type == 'textoArea'">
+            {{optionsPorTipo()}}
+        </p>
+        <p *ngIf="metadado.type == 'checkbox'">
+            <label *ngFor="let option of optionsPorTipo()">
+                <span class="right badge badge-secondary ml-2">{{option}}</span>
+            </label>
+        </p>
+
+        <div class="form-group" *ngIf="metadado.type == 'booleano'">
+            {{optionsPorTipo()}}
+        </div>
+
+        <p *ngIf="metadado.type == 'inteiro'">
+            {{optionsPorTipo()}}
+        </p>
+    </div>
+</div>

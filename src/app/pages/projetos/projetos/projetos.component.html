@@ -14,8 +14,18 @@
 
 <section class="content">
 
-    <h5 class="mt-4 mb-2">Metadados</h5>
+    <h5 class="mt-2 mb-4">Metadados</h5>
 
+    <div class="container-fluid">
 
+        <div class="row">
+
+            <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let metadado of projeto?.metadados">
+                <app-metadado-info [metadado]="metadado"></app-metadado-info>
+            </div>
+
+        </div>
+
+    </div>
 
 </section>

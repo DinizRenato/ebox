@@ -19,7 +19,10 @@ export class ProjetosComponent implements OnInit {
     this.route.paramMap.pipe(
       switchMap(params => this.projetoService.getProjetoWithMetadados(params.get('id')))
     ).subscribe(
-      res => this.projeto = res
+      res => {
+        this.projeto = res,
+          this.projeto.metadados.sort((a, b) => a.order - b.order)
+      }
     )
   }
 

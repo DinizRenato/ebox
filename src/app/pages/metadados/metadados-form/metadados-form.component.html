@@ -1,0 +1,100 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>{{ currentAction == 'new' ? 'Novo Metadado' : 'Alterar' }}</h1>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-sm btn-primary float-right" routerLink="">
+                    << Voltar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+
+    <form [formGroup]="resourceForm" (submit)="submitForm()">
+        <div class="card">
+            <div class="card-header">
+                Metadado
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control" formControlName="name" id="name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="projetoId">Projeto</label>
+                        <select name="type" id="projetoId" formControlName="projetoId" class="form-control"
+                            [attr.disabled]="currentAction == 'edit'">
+                            <option *ngFor="let projeto of projetos" [value]="projeto.id">{{ projeto.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="type">Tipos</label>
+                        <select #mySelect name="type" id="type" formControlName="type" class="form-control"
+                            (change)="onTypeSelected(mySelect.value)">
+                            <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.text }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="option">Option:</label>
+
+                        <input type="text" class="form-control" formControlName="options" id="options"
+                            *ngIf="resourceForm.get('type').value == 'texto'">
+
+                        <input type="number" class="form-control" formControlName="options" id="options"
+                            *ngIf="resourceForm.get('type').value == 'inteiro'">
+
+                        <textarea class="form-control" rows="3" formControlName="options" id="options"
+                            placeholder="Digite o texto..."
+                            *ngIf="resourceForm.get('type').value == 'textoArea'"></textarea>
+
+                        <input id="options" class="form-control" type="date" formControlName="options" id="options"
+                            *ngIf="resourceForm.get('type').value == 'data'">
+
+                        <select multiple="" class="form-control" formControlName="options" id="options"
+                            *ngIf="resourceForm.get('type').value == 'checkbox'">
+                            <option>Opção 1</option>
+                            <option>Opção 2</option>
+                            <option>Opção 3</option>
+                            <option>Opção 4</option>
+                            <option>Opção 5</option>
+                        </select>
+
+                        <div class="form-group" *ngIf="resourceForm.get('type').value == 'booleano'">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="true" name="option"
+                                    formControlName="options" checked="">
+                                <label class="form-check-label">True</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" value="false" formControlName="options"
+                                    name="option">
+                                <label class="form-check-label">False</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button [disabled]="submittingForm || resourceForm.invalid" type="submit"
+                    class="btn btn-success btn-block">
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    {{resourceForm.value | json}}
+
+</section>

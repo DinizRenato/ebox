@@ -85,7 +85,6 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected createResource() {
         const resource: T = this.jsonDataRoResourceFn(this.resourceForm.value);
-        console.log(resource);
         this.resourceService.create(resource)
             .subscribe(
                 resource => this.actionForSuccess(resource),
@@ -105,12 +104,9 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
 
     protected actionForSuccess(resource: T) {
-        // toastr.success("Solicitação processada com sucesso");
-        console.log(this.route.snapshot.parent);
 
         //ROTA INICIAL DO COMPONENTE
         const baseComponentPath: string = this.route.snapshot.parent.url.length > 0 ? this.route.snapshot.parent.url[0].path : '';
-
 
         //redirecionar para recarregar a página
         this.router.navigateByUrl(baseComponentPath, { skipLocationChange: true }).then(
