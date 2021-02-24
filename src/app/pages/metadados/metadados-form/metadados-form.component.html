@@ -30,7 +30,7 @@
                     <div class="form-group col-md-12">
                         <label for="projetoId">Projeto</label>
                         <select name="type" id="projetoId" formControlName="projetoId" class="form-control"
-                            [attr.disabled]="currentAction == 'edit'">
+                            [attr.disabled]="currentAction == 'edit' ? 'disabled' : null">
                             <option *ngFor="let projeto of projetos" [value]="projeto.id">{{ projeto.name }}</option>
                         </select>
                     </div>
@@ -94,7 +94,5 @@
             </div>
         </div>
     </form>
-
-    {{resourceForm.value | json}}
 
 </section>
